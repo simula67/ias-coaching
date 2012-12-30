@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC 
+ "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+
+<title>Personality_Offline_Search</title>
+<script type="text/javascript">
+//Javascript code
+var machine_list = [];
+function add_machine(name_inp,user_inp,pass_inp,com_inp) {
+	var temp = {
+		name: name_inp,
+		user: user_inp,
+		pass: pass_inp,
+		com: com_inp,
+	}
+	machine_list.push(temp);
+}
+function write_out() {
+	for(var i=0;i < machine_list.length;i++) {
+		document.write("<tr id=\"mac"+ (i+1) + "\">");
+		document.write("<td style=\"width:20px\">");
+		document.write(machine_list[i].name);
+		document.write("</td>");
+		document.write("<td style=\"width:20px\">");
+		document.write(machine_list[i].user);
+		document.write("</td>");
+		document.write("<td style=\"width:20px\">");
+		document.write(machine_list[i].pass);
+		document.write("</td>");
+		document.write("<td>");
+		document.write(machine_list[i].com);
+		document.write("</td>");
+		document.write("</tr>");
+	}
+}
+function search() {
+	var loc_string = (document.getElementsByName("location"))[0].value;
+	var user_string = (document.getElementsByName("user"))[0].value;
+	var pass_string = (document.getElementsByName("pass"))[0].value;
+	var com_string = (document.getElementsByName("com"))[0].value;
+	for(var i=0;i < machine_list.length;i++) {
+		flag1 = true;
+		flag2 = true;
+		flag3 = true;
+		flag4 = true;
+		if( loc_string != "" ) {
+			if( machine_list[i].name.toLowerCase().indexOf(loc_string.toLowerCase()) == -1 ) {
+				flag1 = false;
+			}
+		}
+		if( user_string != "" ) {
+			if( machine_list[i].user.toLowerCase().indexOf(user_string.toLowerCase()) == -1 ) {
+				flag2 = false;
+			}
+		}
+		if( pass_string != "" ) {
+			if( machine_list[i].pass.toLowerCase().indexOf(pass_string.toLowerCase()) == -1 ) {
+				flag3 = false;
+			}
+		}
+		if( com_string != "" ) {
+			if( machine_list[i].com.toLowerCase().indexOf(com_string.toLowerCase()) == -1 ) {
+				flag4 = false;
+			}
+		}
+		var manipulate = document.getElementById("mac" + (i+1) );
+		if(flag1 && flag2 && flag3 && flag4) {
+			manipulate.style.visibility = "visible";
+		}
+		else {
+			manipulate.style.visibility = "collapse";
+		}
+	}
+}
+//Add elements here
+{% for quote in allQuotes %}
+add_machine(" {{ quote.name }} ", " {{ quote.field }} ", " {{ quote.position }} "," {{ quote.quotation }} ");
+{% endfor %}
+</script>
+
+</head>
+<body>
+<center><h1>Personality Quotes Search</h1></center>
+<table style="border:none">
+<tr>
+<td style="width:20px"> Personality <br /><input type="textbox" name="location" onkeyup="javascript:search()"></input> </td>
+<td style="width:20px"> Field <br /><input type="textbox" name="user" onkeyup="javascript:search()"></input> </td>
+<td style="width:20px"> Position <br /><input type="textbox" name="pass" onkeyup="javascript:search()"></input> </td>
+<td> Quote <br /><input type="textbox" name="com" onkeyup="javascript:search()"></input> </td>
+</tr>
+
+<script type="text/javascript">
+write_out();
+</script>
+</table>
+</body>
+</html>
