@@ -68,9 +68,11 @@ function search() {
 		var manipulate = document.getElementById("mac" + (i+1) );
 		if(flag1 && flag2 && flag3 && flag4) {
 			manipulate.style.visibility = "visible";
+			manipulate.style.display = "";
 		}
 		else {
 			manipulate.style.visibility = "collapse";
+			manipulate.style.display = "none";
 		}
 	}
 }

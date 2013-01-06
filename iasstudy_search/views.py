@@ -12,7 +12,7 @@ class Quote:
 		self.field = ""
 
 
-def test(request):
+def downloadable(request):
 	allQuotes = []
 	allPersonalities = Personality.objects.all()
 	for person in allPersonalities:

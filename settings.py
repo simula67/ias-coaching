@@ -1,6 +1,6 @@
 # Django settings for ias_coaching project.
 import os.path
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'iasstudy_search',
+    'gunicorn'
 )
 
 # A sample logging configuration. The only tangible logging
